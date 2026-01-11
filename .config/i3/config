@@ -1,0 +1,52 @@
+# Output
+exec --no-startup-id xrandr --output eDP-1 --primary
+
+# Font
+font pango: JetBrainsMonoBold 9
+
+include /home/kitten/.config/i3/*.conf
+
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #ff00ff
+set_from_resource $ibg i3wm.color3 #808080
+set_from_resource $ifg i3wm.color8 #f0f0f0
+
+# Class					border	backgr	text	indicator	child b.
+client.focused			$bg		$bg		$fg		$bg			$bg
+client.focused_inactive	$ibg	$ibg	$ifg	$ibg		$ibg
+client.unfocused		$ibg	$ibg	$ifg	$ibg		$ibg
+client.urgent			$bg		$bg		$fg		$bg			$bg
+client.background		$bg
+
+# Focus follows mouse
+focus_follows_mouse yes
+mouse_warping output
+
+# Focus wrapping
+focus_wrapping yes
+
+# Display popup only if it belong to fullscreen app
+popup_during_fullscreen smart
+
+# For NVidia bin drivers
+force_xinerama no
+
+# Focus on activated window
+focus_on_window_activation none
+
+# Show windows marks
+show_marks yes
+
+# --- Executing apps ---
+
+exec_always killall polybar ; polybar -r
+exec --no-startup-id	picom -b
+
+# Floating shell with fastfetch :)
+exec --no-startup-id xterm -e $SHELL -c "fastfetch && exec $SHELL"
+
+# Keyboard layuot
+exec_always setxkbmap us,ru -option grp:alt_shift_toggle
+exec_always feh --bg-fill ~/Pictures/arch.png  # skull.jpg
+
+exec_always killall redshift; redshift -t 6400K:4000K -l 52:23
